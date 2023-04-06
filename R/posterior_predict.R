@@ -611,7 +611,7 @@ posterior_predict_weibull <- function(i, prep, ntrys = 5, ...) {
 
 posterior_predict_frechet <- function(i, prep, ntrys = 5, ...) {
   nu <- get_dpar(prep, "nu", i = i)
-  scale <- get_dpar(prep, "mu", i = i) / gamma(1 - 1 / nu)
+  scale <- (get_dpar(prep, "mu", i = i) + .Machine$double.eps)/ gamma(1 - 1 / nu)
   rcontinuous(
     n = prep$ndraws, dist = "frechet",
     scale = scale, shape = nu,
